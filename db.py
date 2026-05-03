@@ -37,6 +37,7 @@ class Categoria(Base):
     nome = Column(String(100), nullable=False, unique=True)
     cor = Column(String(7), default="#4CAF50")
     transacoes = relationship("Transacao", back_populates="categoria")
+    metas = relationship("Meta", back_populates="categoria")
 
 
 class Transacao(Base):
@@ -48,6 +49,16 @@ class Transacao(Base):
     tipo = Column(Enum(TipoTransacao), nullable=False)
     categoria_id = Column(Integer, ForeignKey("categorias.id"), nullable=True)
     categoria = relationship("Categoria", back_populates="transacoes")
+
+
+class Meta(Base):
+    __tablename__ = "metas"
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    categoria_id = Column(Integer, ForeignKey("categorias.id"), nullable=False)
+    mes = Column(Integer, nullable=False)
+    ano = Column(Integer, nullable=False)
+    limite = Column(Numeric(12, 2), nullable=False)
+    categoria = relationship("Categoria", back_populates="metas")
 
 
 def init_db():

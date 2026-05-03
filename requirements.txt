@@ -4,3 +4,4 @@ pandas>=2.2.3
 psycopg2-binary>=2.9.9
 sqlalchemy>=2.0.30
 python-dotenv>=1.0.1
+fpdf2>=2.7.9
